@@ -5,8 +5,8 @@ public class CesarCipher {
         Scanner scanner = new Scanner(System.in);
 
         // Solicitar al usuario el texto a cifrar o descifrar
-        System.out.print("CIFRADO CESAR. Ingrese un texto y una code de cifrado que debe ser un numero para cifrar el texto ingresado o en su defecto, decifrarlo. ");
-        System.out.print("Ingrese un texto: ");
+        System.out.print("CIFRADO CESAR.\nIngrese un texto y una code de cifrado que debe ser un numero para cifrar el texto ingresado o en su defecto, decifrarlo. ");
+        System.out.print("\nIngrese un texto: ");
         String texto = scanner.nextLine();
 
         // La code de cifrado se usara para obtener el numero de desplazamiento. 

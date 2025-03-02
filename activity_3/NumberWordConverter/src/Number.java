@@ -16,7 +16,7 @@ public class Number {
             System.out.println("number no permitido. Debe ser entre 1 y 100.");
         } else {
             // Convertimos el número en palabras y lo mostramos en pantalla
-            System.out.println("El número en palabras es: " + numToWords(number));
+            System.out.println("El numero convertido en palabras es: " + numToWords(number));
         }
     }
 
