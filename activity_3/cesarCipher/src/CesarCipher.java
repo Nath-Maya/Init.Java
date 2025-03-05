@@ -12,7 +12,7 @@ public class CesarCipher {
         // La code de cifrado se usara para obtener el numero de desplazamiento. 
         System.out.print("Ingrese la clave de cifrado: ");
         int code = scanner.nextInt();
-        
+
 
         scanner.nextLine();
 
