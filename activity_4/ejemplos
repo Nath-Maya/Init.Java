@@ -1,0 +1,16 @@
+// Definición de la clase
+[modificador] class NombreDeLaClase {
+
+    // Definir los atributos
+    [modificador de acceso] [tipo de dato] [nombre del atributo];
+
+    // Definir el constructor
+    public NombreDeLaClase([parámetros]) {
+        this.atributo = parámetro;
+    }
+
+    // Definir métodos
+    [modificador] [tipo de retorno] [nombreDelMetodo]([parámetros]) {
+        
+    }
+}
