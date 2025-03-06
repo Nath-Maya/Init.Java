@@ -1,6 +1,7 @@
 package com.automobile;
 public class Automovil {
     // Atributos
+    private String marca;
     private String color;
     private String carroceria;
     private String motor;
@@ -10,7 +11,8 @@ public class Automovil {
     private boolean encendido;
 
     // Constructor
-    public Automovil(String color, String carroceria, String motor, int potencia, String transmision, String tipoFrenos) {
+    public Automovil(String marca, String color, String carroceria, String motor, int potencia, String transmision, String tipoFrenos) {
+        this.marca = marca;
         this.color = color;
         this.carroceria = carroceria;
         this.motor = motor;
@@ -24,39 +26,40 @@ public class Automovil {
     public void encender() {
         if (!encendido) {
             encendido = true;
-            System.out.println("El automóvil ha sido encendido.");
+            System.out.println("El auto ha sido encendido.");
         } else {
-            System.out.println("El automóvil ya está encendido.");
+            System.out.println("El auto ya esta prendido.");
         }
     }
 
     public void arrancar() {
         if (encendido) {
-            System.out.println("El automóvil está arrancando.");
+            System.out.println("El auto está arrancando.");
         } else {
-            System.out.println("No puedes arrancar, el automóvil está apagado.");
+            System.out.println("Carro apagado, no se puede arrancar.");
         }
     }
 
     public void frenar() {
-        System.out.println("El automóvil está frenando.");
+        System.out.println("El auto esta deteniendose.");
     }
 
     public void transportar() {
         if (encendido) {
-            System.out.println("El automóvil está transportando pasajeros o carga.");
+            System.out.println("El auto está transportando pasajeros o carga.");
         } else {
-            System.out.println("El automóvil está apagado, no puede transportar.");
+            System.out.println("El auto está apagado, no puede transportar.");
         }
     }
 
-    // Método para mostrar la información del auto
+    // Método para mostrar datos del auto
     public void mostrarInfo() {
+        System.out.println("Marca: " + marca);
         System.out.println("Color: " + color);
-        System.out.println("Carrocería: " + carroceria);
+        System.out.println("Tipo de Carroceria: " + carroceria);
         System.out.println("Motor: " + motor);
         System.out.println("Potencia: " + potencia + " HP");
-        System.out.println("Transmisión: " + transmision);
+        System.out.println("Transmision: " + transmision);
         System.out.println("Tipo de frenos: " + tipoFrenos);
     }
 }
