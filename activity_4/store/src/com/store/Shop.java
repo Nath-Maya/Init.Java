@@ -1,3 +1,4 @@
+package com.store;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,6 @@ public class Shop {
     }
 
     
-
     public int getPhone() {
         return phone;
     }
