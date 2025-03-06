@@ -28,6 +28,8 @@ public class Shop {
         return address;
     }
 
+    
+
     public int getPhone() {
         return phone;
     }
