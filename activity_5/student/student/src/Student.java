@@ -10,6 +10,13 @@ public class Student {
 
     // Constructor
     public Student(String nameStudent, double qualification) {
+
+        if (qualification > 5.0) {
+            System.out.println(Colors.YELLOW + "Calificacion sobrepasa el valor maximo de 5.0, debe ser menor a 5.0"
+                    + Colors.RESET);
+            throw new IllegalArgumentException("Calificacion fuera de rango.");
+
+        }
         this.nameStudent = nameStudent;
         this.qualification = qualification;
         this.approvalStatus = approved(qualification);
@@ -17,17 +24,7 @@ public class Student {
 
     // Metodos
     public boolean approved(Double qualification) {
-        if (qualification > 5.0) {
-            System.out.println(Colors.YELLOW + "Calificacion sobrepasa el valor maximo de 5.0" + Colors.RESET);
-            return false;
-        }
-
-        if (qualification >= 3.0) {
-            return true;
-        } else {
-
-            return false;
-        }
+        return qualification >= 3.0;
     }
 
     public void showData() {
@@ -35,7 +32,8 @@ public class Student {
         System.out.println("Nombre Estudiante: " + nameStudent);
         System.out.println("Calificacion: " + qualification);
         System.out.println(
-                "Estado de aprobacion: " + (approvalStatus ? Colors.GREEN + "Aprobado" + Colors.RESET : Colors.RED + "Reprobado" + Colors.RESET));
+                "Estado de aprobacion: " + (approvalStatus ? Colors.GREEN + "Aprobado" + Colors.RESET
+                        : Colors.RED + "Reprobado" + Colors.RESET));
 
     }
 
