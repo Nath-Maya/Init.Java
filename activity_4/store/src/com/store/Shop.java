@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Shop {
 
-    //Atributos
+    //Atributos --- ENCAPSULACION
     private String name;
     private String address;
     private int phone;
@@ -38,7 +38,7 @@ public class Shop {
         return schedule;
     }
 
-    //Metodos
+    //Metodos --- logica de la tienda
     public void addToCart(String item) {
         cart.add(item);
         System.out.println(item + " ha sido agregado al carrito.");

@@ -5,8 +5,8 @@ public class App {
         //Aplicando metodo constructor
         Shop tienda = new Shop("Variedades Nathalia", "Calle 75# 7 tbis 05 ", 320808776, "9 AM - 9 PM");
 
-        tienda.addToCart("Iphone");
-        tienda.addToCart("Teclado");
+        tienda.addToCart("Carrito");
+        tienda.addToCart("Auriculares");
         tienda.showCart();
     }
 }
