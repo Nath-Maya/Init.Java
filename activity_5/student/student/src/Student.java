@@ -5,36 +5,37 @@ public class Student {
 
     // Atributos
     private String nameStudent;
-    private Float qualification;
+    private Double qualification;
     private boolean approvalStatus;
 
     // Constructor
-    public Student(String nameStudent, Float qualification, String approvalStatus) {
+    public Student(String nameStudent, double qualification) {
         this.nameStudent = nameStudent;
         this.qualification = qualification;
-        this.approvalStatus = false;
+        this.approvalStatus = approved(qualification);
     }
 
     // Metodos
-    public boolean approved(Float qualification) {
+    public boolean approved(Double qualification) {
         if (qualification > 5.0) {
-            System.out.println("Calificación no valida, debe ser menor o igual a 5.0");
+            System.out.println(Colors.YELLOW + "Calificacion sobrepasa el valor maximo de 5.0" + Colors.RESET);
             return false;
         }
 
         if (qualification >= 3.0) {
-            System.out.println("Aprobado");
             return true;
         } else {
-            System.out.println("Reprobado");
+
             return false;
         }
     }
 
-    public void showData(String nameStudent, Float qualification, boolean approvalStatus) {
+    public void showData() {
+
         System.out.println("Nombre Estudiante: " + nameStudent);
         System.out.println("Calificacion: " + qualification);
-        System.out.println("Estado de aprobacion: " + (approvalStatus ? "Aprobado" : "Reprobado"));
+        System.out.println(
+                "Estado de aprobacion: " + (approvalStatus ? Colors.GREEN + "Aprobado" + Colors.RESET : Colors.RED + "Reprobado" + Colors.RESET));
 
     }
 
