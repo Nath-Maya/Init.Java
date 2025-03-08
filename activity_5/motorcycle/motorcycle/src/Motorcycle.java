@@ -13,7 +13,7 @@ public class Motorcycle {
     private double fuelConsumptionPerKm;
     private double totalDistance;
     private double maxFuelCapacity;
-    private double currentFuelLevel;
+    private double fuelLevel;
 
     //Constructor
     public Motorcycle(String color, String brand, int model, double fuelConsumptionPerKm, double totalDistance,
@@ -24,9 +24,14 @@ public class Motorcycle {
         this.fuelConsumptionPerKm = fuelConsumptionPerKm;
         this.totalDistance = totalDistance;
         this.maxFuelCapacity = maxFuelCapacity;
-        this.currentFuelLevel = currentFuelLevel;
+        this.fuelLevel = currentFuelLevel;
     }
 
+    //Metodos
+    public double run(double fuelLevel, double fuelConsumptionPerKm){
+       return totalDistance = fuelLevel / fuelConsumptionPerKm;
+
+    }
 
 
 
