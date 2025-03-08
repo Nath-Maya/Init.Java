@@ -20,9 +20,14 @@ public class Student {
         this.nameStudent = nameStudent;
         this.qualification = qualification;
         this.approvalStatus = approved(qualification);
+        TestStudent.addStudent(this);
     }
 
     // Metodos
+
+    public String getNameStudent() {
+        return nameStudent;
+    }
     public boolean approved(Double qualification) {
         return qualification >= 3.0;
     }
