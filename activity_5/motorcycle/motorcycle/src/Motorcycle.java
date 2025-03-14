@@ -3,10 +3,9 @@
 //Crear una clase PruebaMotocicleta que instancie una moto en la que se evidencia el uso de los métodos por medio de un menú que permita: andar y llenar tanque.
 
 
-
 public class Motorcycle {
 
-    //Atributos
+    // Atributos
     private String color;
     private String brand;
     private int model;
@@ -15,27 +14,63 @@ public class Motorcycle {
     private double maxFuelCapacity;
     private double fuelLevel;
 
-    //Constructor
-    public Motorcycle(String color, String brand, int model, double fuelConsumptionPerKm, double totalDistance,
-            double maxFuelCapacity, double currentFuelLevel) {
+    // Constructor
+    public Motorcycle(String color, String brand, int model, double fuelConsumptionPerKm, double maxFuelCapacity, double currentFuelLevel) {
         this.color = color;
         this.brand = brand;
         this.model = model;
         this.fuelConsumptionPerKm = fuelConsumptionPerKm;
-        this.totalDistance = totalDistance;
+        this.totalDistance = 0; 
         this.maxFuelCapacity = maxFuelCapacity;
-        this.fuelLevel = currentFuelLevel;
+        this.fuelLevel = Math.min(currentFuelLevel, maxFuelCapacity);
     }
 
-    //Metodos
-    public double run(double fuelLevel, double fuelConsumptionPerKm){
-       return totalDistance = fuelLevel / fuelConsumptionPerKm;
+    // Metodo para recorrer distancia
+    public double run(int distancia) {
+        double maxKmPosibles = fuelLevel / fuelConsumptionPerKm; 
+        
+        if (distancia > maxKmPosibles) {
+            distancia = (int) maxKmPosibles; 
+        }
 
+        double combustibleConsumido = distancia * fuelConsumptionPerKm;
+        fuelLevel -= combustibleConsumido;
+        totalDistance += distancia;
+
+        return fuelLevel / fuelConsumptionPerKm; 
     }
+
+    // Metodo para llenado de tanque
+    public int fillTank(int litros) {
+        double newFuelLevel = fuelLevel + litros;
+
+        if (newFuelLevel > maxFuelCapacity) {
+            int sobrante = (int) (newFuelLevel - maxFuelCapacity);
+            fuelLevel = maxFuelCapacity;
+            return sobrante; 
+        } else {
+            fuelLevel = newFuelLevel;
+            return 0; 
+        }
+    }
+
+    
+    public void showData() {
+        System.out.println("Marca: " + brand);
+        System.out.println("Modelo: " + model);
+        System.out.println("Color: " + color);
+        System.out.println("Capacidad Max. de Combustible: " + maxFuelCapacity + " litros");
+        System.out.println("Nivel Actual de Combustible: " + fuelLevel + " litros");
+        System.out.println("Consumo por Km: " + fuelConsumptionPerKm + " litros/km");
+        System.out.println("Distancia Total Recorrida: " + totalDistance + " km");
+        System.out.println("Km restantes con el combustible actual: " + (fuelLevel / fuelConsumptionPerKm) + " km");
+    }
+}
+
 
 
 
 
 
     
-}
+
