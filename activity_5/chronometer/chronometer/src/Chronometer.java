@@ -1,34 +1,27 @@
 public class Chronometer {
-    private int hours;
-    private int minutes;
-    private int seconds;
-    private boolean running;
+    private static int hours = 0;
+    private static int minutes = 0;
+    private static int seconds = 0;
+    private static boolean running = false;
 
-    public Chronometer() {
-        this.hours = 0;
-        this.minutes = 0;
-        this.seconds = 0;
-        this.running = false;
-    }
-
-    public void start() {
+    public static void start() {
         running = true;
         System.out.println("Cronometro iniciado.");
     }
 
-    public void stop() {
+    public static void stop() {
         running = false;
         System.out.println("Cronometro detenido.");
     }
 
-    public void reset() {
+    public static void reset() {
         hours = 0;
         minutes = 0;
         seconds = 0;
         System.out.println("Cronometro reseteado.");
     }
 
-    public void tick() {
+    public static void tick() {
         if (running) {
             seconds++;
             if (seconds == 60) {
@@ -42,7 +35,7 @@ public class Chronometer {
         }
     }
 
-    public void showTime() {
+    public static void showTime() {
         System.out.printf("Tiempo: %02d:%02d:%02d\n", hours, minutes, seconds);
     }
 }

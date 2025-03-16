@@ -1,20 +1,18 @@
 public class TestTime {
     public static void main(String[] args) {
-        Chronometer chronometer = new Chronometer();
+        Chronometer.showTime();
+        Chronometer.start();
+        
+        Chronometer.tick();
+        Chronometer.tick();
+        Chronometer.tick();
 
-        chronometer.showTime();  
-        chronometer.start();
+        Chronometer.showTime();
         
-        chronometer.tick();
-        chronometer.tick();
-        chronometer.tick();
-
-        chronometer.showTime();  
+        Chronometer.stop();
+        Chronometer.showTime();
         
-        chronometer.stop();
-        chronometer.showTime();  
-        
-        chronometer.reset();
-        chronometer.showTime();  
+        Chronometer.reset();
+        Chronometer.showTime();
     }
 }
