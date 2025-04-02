@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class TestFactory {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Seleccione tipo de media (1: Video, 2: Audio): ");

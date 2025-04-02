@@ -1,0 +1,15 @@
+try {
+    // Bloque de código que puede generar una excepción
+} catch (TipoDeExcepcion e) {
+    // Bloque de código para manejar la excepción
+} finally {
+    // Bloque de código que se ejecuta siempre, independientemente de si ocurre o no una excepción
+}
+
+
+throw new TipoDeExcepcion("Mensaje de error");
+
+
+public void metodo() throws TipoDeExcepcion {
+    // Código que puede lanzar la excepción
+}
