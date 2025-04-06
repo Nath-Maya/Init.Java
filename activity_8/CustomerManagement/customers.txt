@@ -1,2 +1,1 @@
-model.Customer@179552d0
-model.Customer@2991690e
+Nathalia,Maya,1144166551,APD printing,active

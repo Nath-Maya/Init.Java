@@ -7,29 +7,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
+import java.io.IOException;
 
 public class MainGUI extends JFrame {
 
-    // MANEJADOR DE CLIENTES
     private CustomerManager customerManager;
-
-    // COMPONENTES DE LA INTERFAZ
     private JTextField nameField, lastNameField, idField, companyField;
     private JComboBox<String> statusBox;
     private JTextArea displayArea;
+    private final String FILE_PATH = "customers.txt";
 
     public MainGUI() {
-        // INICIALIZAR MANEJADOR
         customerManager = new CustomerManager();
 
-        // CONFIGURAR VENTANA PRINCIPAL
+        try {
+            customerManager.loadCustomersFromFile(FILE_PATH);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error loading customers: " + e.getMessage());
+        }
+
         setTitle("Customer Manager");
-        setSize(500, 500);
+        setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // PANEL SUPERIOR CON CAMPOS DE ENTRADA
-        JPanel inputPanel = new JPanel(new GridLayout(7, 2)); // 7 filas para incluir botón extra
+        JPanel inputPanel = new JPanel(new GridLayout(9, 2));
 
         inputPanel.add(new JLabel("First Name:"));
         nameField = new JTextField();
@@ -55,6 +57,10 @@ public class MainGUI extends JFrame {
         addButton.addActionListener(this::addCustomer);
         inputPanel.add(addButton);
 
+        JButton editButton = new JButton("Edit Customer");
+        editButton.addActionListener(this::editCustomer);
+        inputPanel.add(editButton);
+
         JButton listButton = new JButton("List Customers");
         listButton.addActionListener(this::listCustomers);
         inputPanel.add(listButton);
@@ -63,14 +69,20 @@ public class MainGUI extends JFrame {
         saveButton.addActionListener(this::saveCustomersToFile);
         inputPanel.add(saveButton);
 
+        JButton showActiveButton = new JButton("Show Active");
+        showActiveButton.addActionListener(e -> filterCustomersByStatus("Active"));
+        inputPanel.add(showActiveButton);
+
+        JButton showInactiveButton = new JButton("Show Inactive");
+        showInactiveButton.addActionListener(e -> filterCustomersByStatus("Inactive"));
+        inputPanel.add(showInactiveButton);
+
         add(inputPanel, BorderLayout.NORTH);
 
-        // ÁREA DE TEXTO PARA MOSTRAR CLIENTES
         displayArea = new JTextArea();
         displayArea.setEditable(false);
         add(new JScrollPane(displayArea), BorderLayout.CENTER);
 
-        // HACER VISIBLE
         setVisible(true);
     }
 
@@ -82,6 +94,11 @@ public class MainGUI extends JFrame {
         String status = (String) statusBox.getSelectedItem();
 
         if (!firstName.isEmpty() && !lastName.isEmpty() && !id.isEmpty() && !company.isEmpty()) {
+            if (customerManager.findCustomerById(id) != null) {
+                JOptionPane.showMessageDialog(this, "Customer with this ID already exists.");
+                return;
+            }
+
             Customer customer = new Customer(firstName, lastName, id, company, status);
             customerManager.addCustomer(customer);
             displayArea.append("Customer added: " + customer + "\n");
@@ -91,19 +108,66 @@ public class MainGUI extends JFrame {
         }
     }
 
+    private void editCustomer(ActionEvent e) {
+        String id = idField.getText();
+
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter the ID of the customer to edit.");
+            return;
+        }
+
+        Customer existing = customerManager.findCustomerById(id);
+        if (existing == null) {
+            JOptionPane.showMessageDialog(this, "Customer not found.");
+            return;
+        }
+
+        String firstName = nameField.getText();
+        String lastName = lastNameField.getText();
+        String company = companyField.getText();
+        String status = (String) statusBox.getSelectedItem();
+
+        if (firstName.isEmpty() || lastName.isEmpty() || company.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please complete all fields to edit.");
+            return;
+        }
+
+        Customer updated = new Customer(firstName, lastName, id, company, status);
+        customerManager.updateCustomer(updated);
+
+        try {
+            customerManager.saveCustomersToFile(FILE_PATH);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error saving changes: " + ex.getMessage());
+        }
+
+        JOptionPane.showMessageDialog(this, "Customer updated successfully.");
+        listCustomers(null);
+        clearFields();
+    }
+
     private void listCustomers(ActionEvent e) {
         List<Customer> customers = customerManager.getCustomers();
-        displayArea.setText(""); // Limpiar el área
+        displayArea.setText("");
         for (Customer c : customers) {
             displayArea.append(c + "\n");
         }
     }
 
+    private void filterCustomersByStatus(String statusFilter) {
+        List<Customer> customers = customerManager.getCustomers();
+        displayArea.setText("");
+        for (Customer c : customers) {
+            if (c.getStatus().equalsIgnoreCase(statusFilter)) {
+                displayArea.append(c + "\n");
+            }
+        }
+    }
+
     private void saveCustomersToFile(ActionEvent e) {
-        String path = "customers.txt"; // Puedes personalizar esta ruta
         try {
-            customerManager.saveCustomersToFile(path);
-            JOptionPane.showMessageDialog(this, "Clients saved in database: " + path);
+            customerManager.saveCustomersToFile(FILE_PATH);
+            JOptionPane.showMessageDialog(this, "Clients saved in database: " + FILE_PATH);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error saving file: " + ex.getMessage());
         }
